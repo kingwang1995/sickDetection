@@ -181,7 +181,13 @@ namespace Test
             }
             return buff;
         }
-
+        /// <summary>
+        /// 获取数据
+        /// </summary>
+        /// <param name="sourse"></param>
+        /// <param name="startstr"></param>
+        /// <param name="endstr"></param>
+        /// <returns></returns>
         private static string validStr(string sourse, string startstr, string endstr)
         {
             string result = string.Empty;

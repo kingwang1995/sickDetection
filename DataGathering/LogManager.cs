@@ -184,7 +184,7 @@ namespace DataGathering
                 try
                 {
                     //创建log文件
-                    string logname = string.Format("{0}.{1}", "CREDENCES", this.logFileExtName);
+                    string logname = string.Format("{0}.{1}", "CREDENCES", "txt");
                     logFileName = filepath + "\\" + logname;
                     using (StreamWriter sw = new StreamWriter(logFileName, true, logFileEncoding))
                     {
