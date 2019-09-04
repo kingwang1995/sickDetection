@@ -23,6 +23,9 @@ namespace Test
         private bool isok = false;
         private static readonly object Lock = new object();
         List<string> validdatalist;
+        static List<int> errorIndex;
+        static List<double> dis;
+        int indexN = 0;
         public Form1()
         {
             InitializeComponent();
@@ -31,6 +34,7 @@ namespace Test
             Console.WriteLine("连接成功");
             stream = tcpClient.GetStream();
             validdatalist = new List<string>();
+            errorIndex = new List<int>();
         }
         //开始
         private void button1_Click(object sender, EventArgs e)
@@ -96,7 +100,8 @@ namespace Test
                                 }
                                 this.chart1.Series[0].Points.Clear();
                                 InitChart(listx, listy);
-                                List<double> dis = lineFit(listx, listy);
+                                //List<double> dis = lineFit(listx, listy);
+                                List<double> dis = lineFit2(listy);
                                 double difference = Convert.ToDouble(this.textBox3.Text);
                                 bool isHinder = IsHinder(dis, difference);
                                 this.label4.Text = isHinder.ToString();
@@ -106,9 +111,23 @@ namespace Test
                                 {
                                     Console.WriteLine("结果：" + isHinder);
                                     Console.WriteLine(sw.ElapsedMilliseconds + "ms");
-                                }
+
+                                    for (int j = 0; j < listx.Count; j++)
+                                    {
+                                        Log.WriteData("ordata" + indexN, origindataTransformed[startDegree + j].ToString());
+                                        if (errorIndex.Exists(o => o == j + 1))
+                                        {
+                                            Log.WriteData("data" + indexN, origindataTransformed[startDegree + j] + " " + 1);
+                                        }
+                                        else
+                                        {
+                                            Log.WriteData("data" + indexN, origindataTransformed[startDegree + j] + " " + 0);
+                                        }
+                                    }
+                                    indexN++;
+                                }                                
                             }));
-                            
+
                         }
                     }
                     Thread.Sleep(10);
@@ -303,13 +322,58 @@ namespace Test
             a = Dxy / den;
             b = (lambda - Dxx) / den;
             c = -a * x_mean - b * y_mean;
-            //Console.WriteLine(a + "  " + b + "  " + c);
-            List<double> dis = new List<double>();
+            Console.WriteLine(a + "  " + b + "  " + c);
+            dis = new List<double>();
+            errorIndex.Clear();
             for (int i = 0; i < size; i++)
             {
-                double d = Math.Abs(a * x[i] + b * y[i] + c) / Math.Sqrt(a * a + b * b);
-                dis.Add(d);
-                Log.WriteLog(LogType.PROCESS, d + "");
+                if (y[i] < (-a * x[i] - c) / b)
+                {
+                    double d = Math.Abs(a * x[i] + b * y[i] + c) / Math.Sqrt(a * a + b * b);
+                    
+                    if (d > 40)
+                    {
+                        dis.Add(d);
+                        errorIndex.Add(i);
+                    }
+                    //Log.WriteLog(LogType.PROCESS, d + "");
+                }
+            }
+            return dis;
+        }
+        /// <summary>
+        /// 均值法
+        /// </summary>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        private static List<double> lineFit2(List<double> y)
+        {
+            double b;
+            int size = y.Count;
+            if (size < 2)
+            {
+                b = 0;
+                return null;
+            }
+            double sum = 0;
+            for(int i = 0; i < size; i++)
+            {
+                sum += y[i];
+            }
+            b = sum / size;
+            dis = new List<double>();
+            errorIndex.Clear();
+            for (int i = 0; i < size; i++)
+            {
+                if (y[i] < b)
+                {
+                    double d = Math.Abs(y[i] - b);
+                    if (d > 40)
+                    {
+                        dis.Add(d);
+                        errorIndex.Add(i);
+                    }
+                }
             }
             return dis;
         }

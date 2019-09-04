@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChartTest", "ChartTest\Char
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGathering", "DataGathering\DataGathering.csproj", "{1A3CF0DE-6841-4A05-A77B-D820571065F6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDetection", "DataDetection\DataDetection.csproj", "{25D3E14C-C2DE-48C3-9FF4-B617C2FD75C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiChart", "MultiChart\MultiChart.csproj", "{81670B69-B7EF-42D3-8CD0-94154D1AE390}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,14 @@ Global
 		{1A3CF0DE-6841-4A05-A77B-D820571065F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A3CF0DE-6841-4A05-A77B-D820571065F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A3CF0DE-6841-4A05-A77B-D820571065F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25D3E14C-C2DE-48C3-9FF4-B617C2FD75C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25D3E14C-C2DE-48C3-9FF4-B617C2FD75C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25D3E14C-C2DE-48C3-9FF4-B617C2FD75C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25D3E14C-C2DE-48C3-9FF4-B617C2FD75C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81670B69-B7EF-42D3-8CD0-94154D1AE390}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81670B69-B7EF-42D3-8CD0-94154D1AE390}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81670B69-B7EF-42D3-8CD0-94154D1AE390}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81670B69-B7EF-42D3-8CD0-94154D1AE390}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
